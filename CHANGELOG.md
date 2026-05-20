@@ -33,3 +33,12 @@
 - `scripts/core/main.gd` — точка входа
 - `scenes/main/main.tscn` — главная сцена
 - `project.godot`: main_scene подключена
+
+### [Unreleased] — Этап 2: Map Module
+
+#### Added
+- `scripts/systems/map_system.gd` — граф нодов, BFS поиск пути, движение отряда
+- `scripts/core/test_map_factory.gd` — тестовая карта 7 нодов (camp/ruins/temple/oasis/city)
+- `scripts/systems/map_scene.gd` — визуальная карта: фон, линии, кнопки нодов, маркер отряда, HUD, ивент-панель
+- `scenes/world/map_scene.tscn`
+- `main.gd` обновлён: переход на карту при старте

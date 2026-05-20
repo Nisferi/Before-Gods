@@ -11,6 +11,16 @@
 
 ---
 
+## Следующие задачи (Этап 3 — Battle Module)
+
+- [ ] `scripts/systems/battle_system.gd` — расчёт автобоя по формуле
+- [ ] `scripts/systems/battle_scene.gd` — отображение результата боя
+- [ ] `scenes/characters/battle_scene.tscn`
+- [ ] Триггер боя из Map при входе в ноды с `combat_difficulty > 0`
+- [ ] Интеграция EventBus: battle_started → battle_ended → вернуть на карту
+
+---
+
 ## Следующие задачи (Этап 1)
 
 - [ ] Создать `scripts/autoloads/event_bus.gd` — шина событий
@@ -38,6 +48,11 @@
 - [x] Создание `CHANGELOG.md`
 - [x] Создание структуры папок
 - [x] Создание `project.godot` (Godot 4, 1280×720, Landscape)
+- [x] `scripts/systems/map_system.gd` — граф нодов, BFS навигация, EventBus
+- [x] `scripts/core/test_map_factory.gd` — тестовая карта (7 нодов)
+- [x] `scripts/systems/map_scene.gd` — визуал карты, HUD, ивент-панель
+- [x] `scenes/world/map_scene.tscn`
+- [x] `main.gd` — переход на карту при старте
 - [x] Создание `icon.svg`
 - [x] Создание веток `main` и `dev` на GitHub
 - [x] Создание `ai/prompts/lead_architect.md` (системный промпт)

@@ -1,0 +1,127 @@
+# ==============================================================================
+# Godot 4 - engine cache and generated files
+# ==============================================================================
+.godot/
+*.uid
+
+# Godot export presets (may contain platform-specific paths)
+export_presets.cfg
+
+# Godot export output
+export/
+builds/
+*.apk
+*.aab
+*.ipa
+*.exe
+*.x86_64
+*.x86
+*.arm64
+*.pck
+*.zip
+
+# Godot import metadata (generated automatically, safe to ignore)
+# NOTE: *.import files ARE committed - they describe how assets are imported.
+# The .godot/ folder contains the actual generated cache.
+
+# ==============================================================================
+# Secrets and sensitive data - NEVER commit these
+# ==============================================================================
+.env
+.env.*
+*.env
+secrets/
+secrets.*
+*.secret
+*.key
+*.pem
+*.p12
+*.pfx
+private/
+private.*
+tokens/
+tokens.*
+*.token
+credentials/
+credentials.*
+api_keys.*
+config/local.*
+config/private.*
+
+# ==============================================================================
+# OS-generated files
+# ==============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==============================================================================
+# IDE and editor files
+# ==============================================================================
+
+# VS Code
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+# Keep: .vscode/extensions.json (useful to share recommended extensions)
+
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Vim / Neovim
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+
+# ==============================================================================
+# Logs and temporary files
+# ==============================================================================
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+crash_logs/
+logs/
+
+# ==============================================================================
+# AI / agent working files (local only)
+# ==============================================================================
+ai/context/local/
+ai/cache/
+prompts/local/
+prompts/private/
+.agent_state/
+
+# ==============================================================================
+# Node / tools (if any build tools are added)
+# ==============================================================================
+node_modules/
+.npm/
+dist/

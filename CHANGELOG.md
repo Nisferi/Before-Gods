@@ -20,3 +20,16 @@
 - `GAME_DESIGN.md` заполнен: концепция, сеттинг, механики
 - `AGENTS.md` обновлён: архитектурные правила, именование, пути
 - Папки `data/` и `scripts/autoloads/`
+
+### [Unreleased] — Этап 1: Autoloads и скелет
+
+#### Added
+- `scripts/autoloads/event_bus.gd` — шина событий (все сигналы MVP)
+- `scripts/autoloads/game_manager.gd` — глобальное состояние, отряд, ресурсы, мораль
+- `scripts/autoloads/save_system.gd` — persistent/run разделение, логика гибели героя
+- `scripts/core/unit_data.gd` — Resource-класс юнита
+- `scripts/core/enemy_data.gd` — Resource-класс врага
+- `scripts/core/node_data.gd` — Resource-класс нода карты
+- `scripts/core/main.gd` — точка входа
+- `scenes/main/main.tscn` — главная сцена
+- `project.godot`: main_scene подключена

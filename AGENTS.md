@@ -95,6 +95,54 @@ chore: add .gitattributes for binary files
 
 ---
 
+## Архитектурные правила (обязательно для всех агентов)
+
+> Полная архитектура — `docs/architecture.md`. Системный промпт — `ai/prompts/lead_architect.md`.
+
+### Именование
+- Переменные и функции: `snake_case` → `var squad_speed: int = 10`
+- Классы и Resource: `PascalCase` → `class_name UnitData`
+- Строгая типизация **везде**: `var name: String`, `var hp: int`, `var is_dead: bool`
+- Константы: `UPPER_SNAKE_CASE` → `const MAX_SQUAD_SIZE: int = 8`
+
+### Пути папок в проекте
+- Сцены: `res://scenes/` (строчные, не `res://Scenes/`)
+- Скрипты: `res://scripts/` (строчные, не `res://Scripts/`)
+- Данные: `res://data/` (строчные, не `res://Data/`)
+- Autoloads: `res://scripts/autoloads/`
+
+### Модульная изоляция (критично)
+- Модули **Map**, **Battle**, **Base** не импортируют друг друга напрямую
+- Вся межмодульная коммуникация — только через `EventBus`
+- Пример: `EventBus.battle_started.emit(enemy_data)` — не прямой вызов модуля
+
+### Autoloads
+Три глобальных синглтона (доступны из любого скрипта):
+- `EventBus` — шина событий
+- `GameManager` — глобальное состояние
+- `SaveSystem` — сохранение/загрузка
+
+### Хранение данных
+- Игровые данные (статы, конфиги) — через `Resource` классы (`.tres`)
+- Тяжёлые таблицы данных — JSON в `res://data/`
+- Запрещено хранить состояние в глобальных переменных вне Autoloads
+
+### Мобильная оптимизация
+- Избегать тяжёлых циклов в `_process()` — использовать сигналы
+- Тач-цели не менее 88×88px
+- Базовое разрешение: 1280×720, Landscape
+- Нет hover-состояний (touch-only)
+
+### Комментарии в коде
+Только для нетривиальных функций, одна строка максимум:
+```gdscript
+# Рассчитывает исход боя по формуле squad vs enemy с модификаторами
+func resolve_battle(squad: Array[UnitData], enemy: EnemyData) -> String:
+    ...
+```
+
+---
+
 ## Работа с конфиденциальным контентом
 
 Файлы с нарративом, лором, идеями игры (`GAME_DESIGN.md`, папка `docs/lore/`) —

@@ -33,13 +33,14 @@ func get_living_squad() -> Array[UnitData]:
 
 func apply_morale_change(delta: int) -> void:
 	squad_morale = clamp(squad_morale + delta, 0, 100)
+	EventBus.morale_changed.emit(squad_morale)
 
 func _on_unit_died(unit_id: String) -> void:
-	for unit in squad:
+	for unit: UnitData in squad:
 		if unit.unit_id == unit_id:
 			unit.mark_dead()
-	# Losing a comrade hurts morale
-	apply_morale_change(-5)
+	apply_morale_change(-10)
+	EventBus.squad_updated.emit()
 
 func _on_hero_died() -> void:
 	SaveSystem.on_hero_death()

@@ -11,6 +11,18 @@ extends Resource
 @export var is_alive: bool = true
 @export var injuries: Array[String] = []
 @export var equipment: Array[String] = []
+@export var portrait_seed: int = 0
+@export var battle_count: int = 0
+@export var is_veteran: bool = false
+@export var is_hero: bool = false
+
+const INJURY_PENALTIES: Dictionary = {
+	"broken_ribs": {"atk": -2},
+	"leg_wound":   {"hp_max_pct": -0.15},
+	"eye_injury":  {"atk": -1},
+	"hand_wound":  {"atk": -2},
+	"exhaustion":  {},
+}
 
 func apply_damage(amount: int) -> void:
 	hp = max(0, hp - amount)

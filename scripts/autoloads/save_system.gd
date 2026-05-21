@@ -9,6 +9,9 @@ var persistent_data: Dictionary = {
 	"discovered_regions": [],
 	"base_buildings": {},
 	"unlocked_lore": [],
+	"faction_rep": {"nomads": 0, "city_builders": 0, "spirit_walkers": 0},
+	"death_milestones": [],
+	"hall_of_fallen": [],
 }
 
 # Lost on hero death
@@ -18,9 +21,13 @@ var run_data: Dictionary = {
 	"learned_skills": [],
 	"quest_memory": {},
 	"carried_resources": {},
+	"map_seed": 0,
+	"event_flags": {},
+	"squad_snapshot": [],
 }
 
 func save() -> void:
+	_snapshot_squad()
 	var data: Dictionary = {"persistent": persistent_data, "run": run_data}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
@@ -50,6 +57,19 @@ func has_save() -> bool:
 
 func delete_save() -> void:
 	DirAccess.remove_absolute(SAVE_PATH)
+
+func _snapshot_squad() -> void:
+	var snapshot: Array = []
+	for unit: UnitData in GameManager.squad:
+		snapshot.append({
+			"unit_id": unit.unit_id, "unit_name": unit.unit_name,
+			"level": unit.level, "atk": unit.atk,
+			"hp": unit.hp, "hp_max": unit.hp_max,
+			"is_alive": unit.is_alive, "injuries": unit.injuries,
+			"portrait_seed": unit.portrait_seed,
+			"battle_count": unit.battle_count, "is_veteran": unit.is_veteran,
+		})
+	run_data["squad_snapshot"] = snapshot
 
 # Called when hero dies — resets run_data, preserves persistent_data
 func on_hero_death() -> void:

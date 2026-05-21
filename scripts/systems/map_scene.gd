@@ -26,6 +26,7 @@ var _hud_node_lbl: Label
 var _hud_morale_fill: ColorRect
 var _hud_res_lbl: Label
 var _unit_cards: Array = []
+var _hud_panel: Panel   # kept for card rebuild
 
 var _noise: FastNoiseLite
 
@@ -45,6 +46,8 @@ func _ready() -> void:
 
 	EventBus.squad_moved.connect(_on_squad_moved)
 	EventBus.node_event_triggered.connect(_on_event_triggered)
+	EventBus.squad_updated.connect(_on_squad_updated)
+	EventBus.morale_changed.connect(_on_morale_changed)
 
 	_refresh_visuals()
 	_refresh_hud()
@@ -202,6 +205,7 @@ func _build_hud() -> void:
 	panel.add_child(_hud_morale_fill)
 	panel.add_child(_hud_res_lbl)
 
+	_hud_panel = panel
 	_build_unit_cards(panel)
 
 	canvas.add_child(panel)
@@ -446,6 +450,22 @@ func _set_squad_pos(p: Vector2) -> void:
 
 func _on_event_triggered(event_data: Dictionary) -> void:
 	print("Event: ", event_data.get("event_id", ""))
+
+func _on_squad_updated() -> void:
+	if not _hud_panel:
+		return
+	for card in _unit_cards:
+		card.queue_free()
+	_unit_cards.clear()
+	_build_unit_cards(_hud_panel)
+
+func _on_morale_changed(new_value: int) -> void:
+	if _hud_morale_fill:
+		_hud_morale_fill.size.x = 200.0 * clampf(new_value / 100.0, 0.0, 1.0)
+		_hud_morale_fill.color = \
+			Color(0.22, 0.62, 0.32) if new_value > 60 else \
+			Color(0.72, 0.52, 0.10) if new_value > 30 else \
+			Color(0.72, 0.18, 0.14)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
